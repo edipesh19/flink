@@ -1,0 +1,71 @@
+# root level .gitignore file
+
+# Mvn build dirs
+**/target
+
+# Index files on Mac
+**/.DS_Store
+
+# Temp files
+**/abandoned
+
+**/spec-validation-output.txt
+
+# Log files
+**/di-oci*.log*
+
+# Node.js files
+**/nodejs
+**/npm
+
+# Terraform files
+*.tfstate
+*.tfstate.backup
+**/.terraform
+
+###############################################################################
+# Gradle related files
+#
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+
+###############################################################################
+# IntelliJ related files
+#
+# IntelliJ excludes following best practices from
+# https://intellij-support.jetbrains.com/hc/en-us/articles/206544839-How-to-manage-projects-under-Version-Control-Systems
+
+# User-specific things
+.idea/**/workspace.xml
+.idea/**/usage.statistics.xml
+.idea/**/tasks.xml
+
+# Files created by Gradle auto-import
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+
+.idea/libraries
+.idea/**
+# Internal build dirs, shouldn't happen
+**/out
+*.iml
+**/logs
+*.log
+*.hprof
+
+###############################################################################
+# Eclipse related files
+
+**/.settings/
+**/.project
+**/.classpath
+**/bin
+
+# VisualStudio Code files
+**/.vscode/*
+package-lock.json

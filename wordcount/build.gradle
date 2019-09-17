@@ -1,0 +1,84 @@
+buildscript {
+    repositories {
+        jcenter() // this applies only to the Gradle 'Shadow' plugin
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
+ext {
+    javaVersion = '1.8'
+    flinkVersion = '1.9.0'
+    scalaBinaryVersion = '2.12'
+    slf4jVersion = '1.7.7'
+    log4jVersion = '1.2.17'
+}
+group 'com.dipesh.learn'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = ext.javaVersion
+targetCompatibility = ext.javaVersion
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+//applicationDefaultJvmArgs = ["-Dlog4j.configuration=log4j.properties"]
+
+repositories {
+    mavenCentral()
+    maven { url "https://repository.apache.org/content/repositories/snapshots/" }
+}
+
+//configurations {
+//    flinkShadowJar // dependencies which go into the shadowJar
+//
+//    // always exclude these (also from transitive dependencies) since they are provided by Flink
+//    flinkShadowJar.exclude group: 'org.apache.flink', module: 'force-shading'
+//    flinkShadowJar.exclude group: 'com.google.code.findbugs', module: 'jsr305'
+//    flinkShadowJar.exclude group: 'org.slf4j'
+//    flinkShadowJar.exclude group: 'log4j'
+//}
+
+dependencies {
+    compile "org.apache.flink:flink-java:${flinkVersion}"
+    compile "org.apache.flink:flink-streaming-java_${scalaBinaryVersion}:${flinkVersion}"
+    compile "org.apache.flink:flink-clients_${scalaBinaryVersion}:${flinkVersion}"
+
+    // --------------------------------------------------------------
+    // Dependencies that should be part of the shadow jar, e.g.
+    // connectors. These must be in the flinkShadowJar configuration!
+    // --------------------------------------------------------------
+    //flinkShadowJar "org.apache.flink:flink-connector-kafka-0.11_${scalaBinaryVersion}:${flinkVersion}"
+
+    compile "log4j:log4j:${log4jVersion}"
+    compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+}
+
+// make compileOnly dependencies available for tests:
+//sourceSets {
+//    main.compileClasspath += configurations.flinkShadowJar
+//    main.runtimeClasspath += configurations.flinkShadowJar
+//
+//    test.compileClasspath += configurations.flinkShadowJar
+//    test.runtimeClasspath += configurations.flinkShadowJar
+//
+//    javadoc.classpath += configurations.flinkShadowJar
+//}
+
+//run.classpath = sourceSets.main.runtimeClasspath
+
+shadowJar {
+    mergeServiceFiles()
+    manifest {
+        attributes('Main-Class': 'com.learn.flink.wordcount.WordCount')
+    }
+}
+
+
+build.dependsOn shadowJar
