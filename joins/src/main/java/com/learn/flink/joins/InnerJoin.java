@@ -3,6 +3,7 @@ package com.learn.flink.joins;
 
 import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.operators.base.JoinOperatorBase.JoinHint;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -43,7 +44,7 @@ public class InnerJoin {
 
         // join datasets on person_id
         // joined format will be <id, person_name, state>
-        DataSet<Tuple3<Integer, String, String>> joined = personSet.join(locationSet).where(0) .equalTo(0)
+        DataSet<Tuple3<Integer, String, String>> joined = personSet.join(locationSet, JoinHint.REPARTITION_SORT_MERGE).where(0) .equalTo(0)
             .with(new JoinFunction<Tuple2<Integer, String>, Tuple2<Integer, String>, Tuple3<Integer, String, String>>()
             {
 
