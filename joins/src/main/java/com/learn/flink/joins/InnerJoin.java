@@ -53,6 +53,21 @@ public class InnerJoin {
                 }
             });
 
+
+        // Following is the example of left outer join. Similarly there is right outer join and fullouter join
+//        DataSet<Tuple3<Integer, String, String>> joined = personSet.leftOuterJoin(locationSet).where(0) .equalTo(0)
+//            .with(new JoinFunction<Tuple2<Integer, String>, Tuple2<Integer, String>, Tuple3<Integer, String, String>>()
+//            {
+//
+//                public Tuple3<Integer, String, String> join(Tuple2<Integer, String> person,  Tuple2<Integer, String> location)
+//                {
+//                    if(location == null){
+//                        return new Tuple3<Integer, String, String>(person.f0,   person.f1,  "NULL");
+//                    }
+//                    return new Tuple3<Integer, String, String>(person.f0,   person.f1,  location.f1);         // returns tuple of (1 John DC)
+//                }
+//            });
+
         joined.writeAsCsv(params.get("output"), "\n", " ");
 
         env.execute("Join example");
