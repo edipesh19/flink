@@ -5,4 +5,5 @@ include ':joins'
 project(':joins').projectDir = new File('joins')
 include ':wordcount'
 project(':wordcount').projectDir = new File('wordcount')
-
+include 'wordcountstream'
+project(':wordcountstream').projectDir = new File('wordcountstream')

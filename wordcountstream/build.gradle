@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        jcenter() // this applies only to the Gradle 'Shadow' plugin
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+apply from: "$rootDir/gradle/dependency-management.gradle"
+description = "Stream example"
+
+
+ext {
+    javaVersion = '1.8'
+}
+
+group 'com.learn.flink.wordcount.stream'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = ext.javaVersion
+targetCompatibility = ext.javaVersion
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repository.apache.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    stdFlinkDeps()
+}
+
+shadowJar {
+    mergeServiceFiles()
+    manifest {
+        attributes('Main-Class': 'com.learn.flink.wordcount.stream.WordcountStream')
+    }
+}
+
+
+build.dependsOn shadowJar
