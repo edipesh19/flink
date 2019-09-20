@@ -7,3 +7,6 @@ include ':wordcount'
 project(':wordcount').projectDir = new File('wordcount')
 include 'wordcountstream'
 project(':wordcountstream').projectDir = new File('wordcountstream')
+include 'reduce'
+project(':reduce').projectDir = new File('reduce')
+
