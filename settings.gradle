@@ -11,4 +11,6 @@ include 'reduce'
 project(':reduce').projectDir = new File('reduce')
 include 'aggregation'
 project(':aggregation').projectDir = new File('aggregation')
+include 'split'
+project(':split').projectDir = new File('split')
 
