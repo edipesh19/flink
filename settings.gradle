@@ -9,4 +9,6 @@ include 'wordcountstream'
 project(':wordcountstream').projectDir = new File('wordcountstream')
 include 'reduce'
 project(':reduce').projectDir = new File('reduce')
+include 'aggregation'
+project(':aggregation').projectDir = new File('aggregation')
 
