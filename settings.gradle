@@ -13,4 +13,7 @@ include 'aggregation'
 project(':aggregation').projectDir = new File('aggregation')
 include 'split'
 project(':split').projectDir = new File('split')
+include 'assignment-cab'
+findProject(':assignment-cab')?.name = 'cab'
+include 'min'
 
