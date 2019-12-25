@@ -28,4 +28,20 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    // Localization -> i10n
+//    @Bean
+//    public LocaleResolver localResolver(){
+//        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+//        localeResolver.setDefaultLocale(Locale.US);
+//        return localeResolver;
+//
+//    }
+//
+//    @Bean
+//    public ResourceBundleMessageSource bundleMessageSource() {
+//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//        messageSource.setBasename("messages");
+//        return messageSource;
+//    }
+
 }
